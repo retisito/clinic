@@ -3,26 +3,26 @@
 namespace app\controllers\admin;
 
 use Yii;
-use app\models\Center;
-use app\models\CenterSearch;
+use app\models\Environment;
+use app\models\EnvironmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * CenterController implements the CRUD actions for Center model.
+ * EnvironmentController implements the CRUD actions for Environment model.
  */
-class CenterController extends Controller
+class EnvironmentController extends Controller
 {
     public $layout = 'admin/main';
     use \app\common\traits\Authorization;
-
+    
     /**
-     * Lists all Center models.
+     * Lists all Environment models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CenterSearch();
+        $searchModel = new EnvironmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -32,7 +32,7 @@ class CenterController extends Controller
     }
 
     /**
-     * Displays a single Center model.
+     * Displays a single Environment model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -45,13 +45,13 @@ class CenterController extends Controller
     }
 
     /**
-     * Creates a new Center model.
+     * Creates a new Environment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Center();
+        $model = new Environment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -63,7 +63,7 @@ class CenterController extends Controller
     }
 
     /**
-     * Updates an existing Center model.
+     * Updates an existing Environment model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -83,7 +83,7 @@ class CenterController extends Controller
     }
 
     /**
-     * Deletes an existing Center model.
+     * Deletes an existing Environment model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -97,15 +97,15 @@ class CenterController extends Controller
     }
 
     /**
-     * Finds the Center model based on its primary key value.
+     * Finds the Environment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Center the loaded model
+     * @return Environment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Center::findOne($id)) !== null) {
+        if (($model = Environment::findOne($id)) !== null) {
             return $model;
         }
 

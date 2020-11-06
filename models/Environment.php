@@ -5,17 +5,20 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "status".
+ * This is the model class for table "environment".
  *
  * @property int $id
+ * @property int $center_id
  * @property string $name
  * @property string|null $description
  * @property string|null $created_by
  * @property string|null $updated_by
  * @property string|null $created_at
  * @property string|null $updated_at
+ *
+ * @property Center $center
  */
-class Status extends \yii\db\ActiveRecord
+class Environment extends \yii\db\ActiveRecord
 {
     use \app\common\traits\Signature;
     
@@ -24,7 +27,7 @@ class Status extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'status';
+        return 'environment';
     }
 
     /**
@@ -33,11 +36,12 @@ class Status extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['center_id', 'name'], 'required'],
+            [['center_id'], 'integer'],
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'created_by', 'updated_by'], 'string', 'max' => 255],
-            [['name'], 'unique'],
+            [['center_id'], 'exist', 'skipOnError' => true, 'targetClass' => Center::className(), 'targetAttribute' => ['center_id' => 'id']],
         ];
     }
 
@@ -48,6 +52,7 @@ class Status extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'center_id' => 'Center ID',
             'name' => 'Name',
             'description' => 'Description',
             'created_by' => 'Created By',
@@ -55,5 +60,15 @@ class Status extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * Gets query for [[Center]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCenter()
+    {
+        return $this->hasOne(Center::className(), ['id' => 'center_id']);
     }
 }

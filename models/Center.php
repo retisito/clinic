@@ -17,7 +17,7 @@ use Yii;
  */
 class Center extends \yii\db\ActiveRecord
 {
-    use \app\common\traits\Signature; 
+    use \app\common\traits\Signature;
     
     /**
      * {@inheritdoc}
