@@ -1,1 +1,1 @@
-$.pjax.reload({container: '#id-pjax'});
+//$.pjax.reload({container: '#id-pjax'});

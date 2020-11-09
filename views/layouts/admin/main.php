@@ -43,6 +43,7 @@ AppAsset::register($this);
             ['label' => 'Environment', 'url' => ['/admin/environment/index']],
             ['label' => 'Equipment', 'url' => ['/admin/equipment/index']],
             ['label' => 'Status', 'url' => ['/admin/status/index']],
+            ['label' => 'Inspection', 'url' => ['/admin/inspection/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
