@@ -18,10 +18,10 @@ use app\models\Status;
 ?>
 
 <div class="inspection-form">
-    
-    <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'center_id')->widget(Select2::classname(), [
+<?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field(isset($model->equipment) ? $model->equipment->environment->center : $model, 'id')->widget(Select2::classname(), [
             'data' => ArrayHelper::map(Center::find()
                 ->select(['id', 'name'])
                 ->all(), 'id', 'name'
@@ -33,9 +33,9 @@ use app\models\Status;
         ]);
     ?>
 
-    <?= $form->field($model, 'environment_id')->widget(DepDrop::classname(), [
+    <?= $form->field(isset($model->equipment) ? $model->equipment->environment : $model, 'id')->widget(DepDrop::classname(), [
             'data' => ArrayHelper::map(Environment::find()
-                ->where(['center_id' => $model->center_id])
+                ->where(['center_id' => isset($model->equipment) ? $model->equipment->environment->center_id : 0])
                 ->select(['id', 'name'])
                 ->all(), 'id', 'name'
             ),
@@ -44,15 +44,15 @@ use app\models\Status;
             'select2Options' => ['pluginOptions' => ['allowClear' => true]],
             'pluginOptions' => [
                 'depends' => ['centers'],
-                'url' => Url::to(['/admin/inspection/environments']),
+                'url' => Url::to(['/admin/environment/list']),
                 'loadingText' => 'Loading child level 1 ...',
             ]
         ]);
     ?>
-    
+
     <?= $form->field($model, 'equipment_id')->widget(DepDrop::classname(), [
             'data' => ArrayHelper::map(Equipment::find()
-                ->where(['environment_id' => $model->environment_id])
+                ->where(['environment_id' => isset($model->equipment) ? $model->equipment->environment_id : 0])
                 ->select(['id', 'name'])
                 ->all(), 'id', 'name'
             ),
@@ -61,7 +61,7 @@ use app\models\Status;
             'select2Options' => ['pluginOptions' => ['allowClear' => true]],
             'pluginOptions' => [
                 'depends' => ['centers', 'environments'],
-                'url' => Url::to(['/admin/inspection/equipments']),
+                'url' => Url::to(['/admin/equipment/list']),
                 'loadingText' => 'Loading child level 2 ...',
             ]
         ]);

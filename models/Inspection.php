@@ -8,8 +8,6 @@ use Yii;
  * This is the model class for table "inspection".
  *
  * @property int $id
- * @property int $center_id
- * @property int $environment_id
  * @property int $equipment_id
  * @property int $status_id
  * @property string|null $name
@@ -24,8 +22,6 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $updated_at
  *
- * @property Center $center
- * @property Environment $environment
  * @property Equipment $equipment
  * @property Status $status
  */
@@ -47,13 +43,11 @@ class Inspection extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['center_id', 'environment_id', 'equipment_id', 'status_id'], 'required'],
-            [['center_id', 'environment_id', 'equipment_id', 'status_id'], 'integer'],
+            [['equipment_id', 'status_id'], 'required'],
+            [['equipment_id', 'status_id'], 'integer'],
             [['description'], 'string'],
             [['planned_at', 'executed_at', 'data_sent_at', 'report_sent_at', 'created_at', 'updated_at'], 'safe'],
             [['name', 'code', 'created_by', 'updated_by'], 'string', 'max' => 255],
-            [['center_id'], 'exist', 'skipOnError' => true, 'targetClass' => Center::className(), 'targetAttribute' => ['center_id' => 'id']],
-            [['environment_id'], 'exist', 'skipOnError' => true, 'targetClass' => Environment::className(), 'targetAttribute' => ['environment_id' => 'id']],
             [['equipment_id'], 'exist', 'skipOnError' => true, 'targetClass' => Equipment::className(), 'targetAttribute' => ['equipment_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
         ];
@@ -66,8 +60,6 @@ class Inspection extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'center_id' => 'Center ID',
-            'environment_id' => 'Environment ID',
             'equipment_id' => 'Equipment ID',
             'status_id' => 'Status ID',
             'name' => 'Name',
@@ -82,26 +74,6 @@ class Inspection extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
-    }
-
-    /**
-     * Gets query for [[Center]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCenter()
-    {
-        return $this->hasOne(Center::className(), ['id' => 'center_id']);
-    }
-
-    /**
-     * Gets query for [[Environment]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEnvironment()
-    {
-        return $this->hasOne(Environment::className(), ['id' => 'environment_id']);
     }
 
     /**

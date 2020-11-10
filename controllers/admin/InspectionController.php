@@ -5,11 +5,8 @@ namespace app\controllers\admin;
 use Yii;
 use app\models\Inspection;
 use app\models\InspectionSearch;
-use app\models\Environment;
-use app\models\Equipment;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\Response;
 
 /**
  * InspectionController implements the CRUD actions for Inspection model.
@@ -113,43 +110,5 @@ class InspectionController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    public function actionEnvironments() {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        $out = [];
-
-        if (isset($_POST['depdrop_parents'])) {
-            $ids = $_POST['depdrop_parents'];
-            
-            if ($ids != null) {
-                $out = Environment::find()->
-                    where(['center_id' => $ids[0]])->
-                    select(['id', 'name'])->all();
-
-                return ['output' => $out, 'selected' => ''];
-            }
-        }
-
-        return ['output' => '', 'selected' => ''];
-    }
-
-    public function actionEquipments() {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        $out = [];
-
-        if (isset($_POST['depdrop_parents'])) {
-            $ids = $_POST['depdrop_parents'];
-            
-            if ($ids != null) {
-                $out = Equipment::find()->
-                    where(['environment_id' => $ids[1]])->
-                    select(['id', 'name'])->all();
-
-                return ['output' => $out, 'selected' => ''];
-            }
-        }
-
-        return ['output' => '', 'selected' => ''];
     }
 }

@@ -7,6 +7,7 @@ use app\models\Equipment;
 use app\models\EquipmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * EquipmentController implements the CRUD actions for Equipment model.
@@ -110,5 +111,24 @@ class EquipmentController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionList() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $out = [];
+
+        if (isset($_POST['depdrop_parents'])) {
+            $ids = $_POST['depdrop_parents'];
+            
+            if ($ids != null) {
+                $out = Equipment::find()->
+                    where(['environment_id' => $ids[1]])->
+                    select(['id', 'name'])->all();
+
+                return ['output' => $out, 'selected' => ''];
+            }
+        }
+
+        return ['output' => '', 'selected' => ''];
     }
 }

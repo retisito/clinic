@@ -1,9 +1,12 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
+use app\models\Center;
 use app\models\Environment;
 
 /* @var $this yii\web\View */
@@ -15,12 +18,32 @@ use app\models\Environment;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'environment_id')->widget(Select2::classname(), [
-            'data' => ArrayHelper::map(Environment::find()->select(['id', 'name'])->all(),'id','name'),
-            'options' => ['placeholder' => 'Select a environment ...'],
+    <?= $form->field(isset($model->environment) ? $model->environment->center : $model, 'id')->widget(Select2::classname(), [
+            'data' => ArrayHelper::map(Center::find()
+                ->select(['id', 'name'])
+                ->all(), 'id', 'name'
+            ),
+            'options' => ['id' => 'centers', 'placeholder' => 'Select a Center ...'],
             'pluginOptions' => [
                 'allowClear' => true
-            ],  
+            ], 
+        ]);
+    ?>
+
+    <?= $form->field($model, 'environment_id')->widget(DepDrop::classname(), [
+            'data' => ArrayHelper::map(Environment::find()
+                ->where(['center_id' => isset($model->environment) ? $model->environment->center_id : 0])
+                ->select(['id', 'name'])
+                ->all(), 'id', 'name'
+            ),
+            'options' => ['id' => 'environments', 'placeholder' => 'Select a Environment ...'],
+            'type' => DepDrop::TYPE_SELECT2,
+            'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+            'pluginOptions' => [
+                'depends' => ['centers'],
+                'url' => Url::to(['/admin/environment/list']),
+                'loadingText' => 'Loading child level 1 ...',
+            ]
         ]);
     ?>
 

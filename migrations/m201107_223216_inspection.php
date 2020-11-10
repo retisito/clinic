@@ -15,8 +15,8 @@ class m201107_223216_inspection extends Migration
         echo "Create table Inspection.\n";
         $this->createTable('inspection', [
             'id' => $this->primaryKey(),
-            'center_id' => $this->integer()->notNull(),
-            'environment_id' => $this->integer()->notNull(),
+            #'center_id' => $this->integer()->notNull(),
+            #'environment_id' => $this->integer()->notNull(),
             'equipment_id' => $this->integer()->notNull(),
             'status_id' => $this->integer()->notNull(),
             'name' => $this->string(),
@@ -31,7 +31,7 @@ class m201107_223216_inspection extends Migration
             'created_at' => $this->datetime(),
             'updated_at' => $this->datetime(),
         ]);
-
+        /*
         $this->createIndex(
             'idx-inspection-center_id',
             'inspection',
@@ -61,7 +61,7 @@ class m201107_223216_inspection extends Migration
             'id',
             'CASCADE',
         );
-
+        */
         $this->createIndex(
             'idx-inspection-equipment_id',
             'inspection',

@@ -7,6 +7,7 @@ use app\models\Environment;
 use app\models\EnvironmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * EnvironmentController implements the CRUD actions for Environment model.
@@ -110,5 +111,24 @@ class EnvironmentController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionList() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $out = [];
+
+        if (isset($_POST['depdrop_parents'])) {
+            $ids = $_POST['depdrop_parents'];
+            
+            if ($ids != null) {
+                $out = Environment::find()->
+                    where(['center_id' => $ids[0]])->
+                    select(['id', 'name'])->all();
+
+                return ['output' => $out, 'selected' => ''];
+            }
+        }
+
+        return ['output' => '', 'selected' => ''];
     }
 }

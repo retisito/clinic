@@ -17,7 +17,7 @@ class InspectionSearch extends Inspection
     public function rules()
     {
         return [
-            [['id', 'center_id', 'environment_id', 'equipment_id', 'status_id'], 'integer'],
+            [['id', 'equipment_id', 'status_id'], 'integer'],
             [['name', 'code', 'description', 'planned_at', 'executed_at', 'data_sent_at', 'report_sent_at', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -59,8 +59,6 @@ class InspectionSearch extends Inspection
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'center_id' => $this->center_id,
-            'environment_id' => $this->environment_id,
             'equipment_id' => $this->equipment_id,
             'status_id' => $this->status_id,
             'planned_at' => $this->planned_at,
