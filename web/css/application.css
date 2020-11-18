@@ -113,3 +113,12 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/* Fixies */
+.button-fix{
+    padding-top: 10px;
+}
+
+.navbar-brand{
+    max-width: 150px;
+}

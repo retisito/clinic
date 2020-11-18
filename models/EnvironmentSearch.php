@@ -11,14 +11,16 @@ use app\models\Environment;
  */
 class EnvironmentSearch extends Environment
 {
+    public $chunck;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'center_id'], 'integer'],
-            [['name', 'description', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['chunck'], 'safe'],
         ];
     }
 
@@ -31,10 +33,8 @@ class EnvironmentSearch extends Environment
         return Model::scenarios();
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
+    /**c
+     * chunckta provider instance with search query appliedchunckparam array $params
      *
      * @return ActiveDataProvider
      */
@@ -57,17 +57,16 @@ class EnvironmentSearch extends Environment
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'center_id' => $this->center_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+        $query->orFilterWhere([
+            'id' => $this->chunck,
+            //'center_id' => $this->chunck,
+            //'created_at' => $this->chunck,
+            //'updated_at' => $this->chunck,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
+        $query->orFilterWhere(['like', 'name', $this->chunck])
+              ->orFilterWhere(['like', 'created_by', $this->chunck])
+              ->orFilterWhere(['like', 'updated_by', $this->chunck]);
 
         return $dataProvider;
     }

@@ -29,12 +29,11 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
+        'brandLabel' => '<img src="/img/serofca-logo-1.png" style="max-width:100%;">',
+        //'brandUrl' => Yii::$app->homeUrl,
+        'options' => ['class' => 'navbar-inverse navbar-fixed-top'],        
     ]);
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
