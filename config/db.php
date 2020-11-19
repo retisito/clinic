@@ -3,6 +3,7 @@
 return [
     /*
     'class' => 'yii\db\Connection',
+    //'dsn' => 'mysql:host=142.44.214.111;dbname=serofcai_clinic;charset=utf8',
     'dsn' => 'mysql:host=localhost;dbname=serofcai_clinic;charset=utf8',
     'username' => 'serofcai_clinic',
     'password' => '9sVrUuAWAnkePYwY',
