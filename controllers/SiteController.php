@@ -61,7 +61,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->redirect(['login']);
+        $this->redirect([Yii::$app->user->isGuest ? 'login' : 'admin/dashboard']);
     }
 
     /**

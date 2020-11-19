@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Equipment;
+use app\models\EquipmentView;
 
 /**
- * EquipmentSearch represents the model behind the search form of `app\models\Equipment`.
+ * EquipmentSearch represents the model behind the search form of `app\models\EquipmentView`.
  */
-class EquipmentSearch extends Equipment
+class EquipmentSearch extends EquipmentView
 {
     public $chunck;
 
@@ -42,6 +42,9 @@ class EquipmentSearch extends Equipment
      */
     public function search($params)
     {   
+        $query = EquipmentView::find();
+        
+        /*
         $query = (new \yii\db\Query())
             ->select([
                 'equipment.id',
@@ -54,7 +57,8 @@ class EquipmentSearch extends Equipment
             ->from('equipment')
             ->leftJoin('environment', 'equipment.environment_id = environment.id')
             ->leftJoin('center', 'environment.center_id = center.id');
-            
+        */
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -71,17 +75,17 @@ class EquipmentSearch extends Equipment
 
         // grid filtering conditions
         $query->orFilterWhere([
-            'equipment.id' => $this->chunck,
+            'id' => $this->chunck,
             //'environment_id' => $this->chunck,
             //'created_at' => $this->chunck,
             //'updated_at' => $this->chunck,
         ]);
 
-        $query->orFilterWhere(['like', 'center.name', $this->chunck])
-            ->orFilterWhere(['like', 'environment.name', $this->chunck])
-            ->orFilterWhere(['like', 'equipment.name', $this->chunck])
-            ->orFilterWhere(['like', 'equipment.created_by', $this->chunck])
-            ->orFilterWhere(['like', 'equipment.updated_by', $this->chunck]);
+        $query->orFilterWhere(['like', 'center_name', $this->chunck])
+            ->orFilterWhere(['like', 'environment_name', $this->chunck])
+            ->orFilterWhere(['like', 'name', $this->chunck])
+            ->orFilterWhere(['like', 'created_by', $this->chunck])
+            ->orFilterWhere(['like', 'updated_by', $this->chunck]);
         
         return $dataProvider;
     }

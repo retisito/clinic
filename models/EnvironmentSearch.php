@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Environment;
+use app\models\EnvironmentView;
 
 /**
- * EnvironmentSearch represents the model behind the search form of `app\models\Environment`.
+ * EnvironmentSearch represents the model behind the search form of `app\models\EnvironmentView`.
  */
-class EnvironmentSearch extends Environment
+class EnvironmentSearch extends EnvironmentView
 {
     public $chunck;
 
@@ -40,8 +40,7 @@ class EnvironmentSearch extends Environment
      */
     public function search($params)
     {
-        $query = Environment::find()
-            ->joinWith('center');
+        $query = EnvironmentView::find();
 
         // add conditions that should always apply here
 
@@ -59,16 +58,16 @@ class EnvironmentSearch extends Environment
 
         // grid filtering conditions
         $query->orFilterWhere([
-            'environment.id' => $this->chunck,
+            'id' => $this->chunck,
             //'center_id' => $this->chunck,
             //'created_at' => $this->chunck,
             //'updated_at' => $this->chunck,
         ]);
 
-        $query->orFilterWhere(['like', 'center.name', $this->chunck])
-            ->orFilterWhere(['like', 'environment.name', $this->chunck])
-            ->orFilterWhere(['like', 'environment.created_by', $this->chunck])
-            ->orFilterWhere(['like', 'environment.updated_by', $this->chunck]);
+        $query->orFilterWhere(['like', 'center_name', $this->chunck])
+            ->orFilterWhere(['like', 'name', $this->chunck])
+            ->orFilterWhere(['like', 'created_by', $this->chunck])
+            ->orFilterWhere(['like', 'updated_by', $this->chunck]);
 
         return $dataProvider;
     }

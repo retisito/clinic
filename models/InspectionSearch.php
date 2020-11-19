@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Inspection;
+use app\models\InspectionView;
 
 /**
- * InspectionSearch represents the model behind the search form of `app\models\Inspection`.
+ * InspectionSearch represents the model behind the search form of `app\models\InspectionView`.
  */
-class InspectionSearch extends Inspection
+class InspectionSearch extends InspectionView
 {
     public $chunck;
 
@@ -42,6 +42,9 @@ class InspectionSearch extends Inspection
      */
     public function search($params)
     {
+        $query = InspectionView::find();
+        
+        /*
         $query = (new \yii\db\Query())
             ->select([
                 'inspection.id',
@@ -58,6 +61,7 @@ class InspectionSearch extends Inspection
             ->leftJoin('environment', 'equipment.environment_id = environment.id')
             ->leftJoin('center', 'environment.center_id = center.id')
             ->leftJoin('status', 'inspection.status_id = status.id');
+        */
 
         // add conditions that should always apply here
 
@@ -75,7 +79,7 @@ class InspectionSearch extends Inspection
 
         // grid filtering conditions
         $query->orFilterWhere([
-            'inspection.id' => $this->chunck,
+            'id' => $this->chunck,
             //'equipment_id' => $this->chunck,
             //'status_id' => $this->chunck,
             //'planned_at' => $this->chunck,
@@ -86,14 +90,13 @@ class InspectionSearch extends Inspection
             //'updated_at' => $this->chunck,
         ]);
 
-        $query->orFilterWhere(['like', 'inspection.name', $this->chunck])
-            ->orFilterWhere(['like', 'center.name', $this->chunck])
-            ->orFilterWhere(['like', 'environment.name', $this->chunck])
-            ->orFilterWhere(['like', 'equipment.name', $this->chunck])
-            ->orFilterWhere(['like', 'inspection.name', $this->chunck])
-            ->orFilterWhere(['like', 'status.name', $this->chunck])
-            ->orFilterWhere(['like', 'inspection.created_by', $this->chunck])
-            ->orFilterWhere(['like', 'inspection.updated_by', $this->chunck]);
+        $query->orFilterWhere(['like', 'center_name', $this->chunck])
+            ->orFilterWhere(['like', 'environment_name', $this->chunck])
+            ->orFilterWhere(['like', 'equipment_name', $this->chunck])
+            ->orFilterWhere(['like', 'name', $this->chunck])
+            ->orFilterWhere(['like', 'status_name', $this->chunck])
+            ->orFilterWhere(['like', 'created_by', $this->chunck])
+            ->orFilterWhere(['like', 'updated_by', $this->chunck]);
 
         return $dataProvider;
     }
