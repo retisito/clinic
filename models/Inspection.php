@@ -95,7 +95,7 @@ class Inspection extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
-
+    
     public function beforeSave($insert) {
         
         if (!empty($this->planned_at))
@@ -112,4 +112,5 @@ class Inspection extends \yii\db\ActiveRecord
            
         return true;
     }
+    
 }

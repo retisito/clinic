@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EquipmentSearch */
@@ -18,25 +19,27 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Equipment', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php Pjax::begin(); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'environment_id',
+            'center_name',
+            'environment_name',
             'name',
-            'brand',
-            'model',
+            //'brand',
+            //'model',
             //'serial',
             //'code',
             //'size',
             //'description:ntext',
-            //'created_by',
-            //'updated_by',
+            'created_by',
+            'updated_by',
             //'created_at',
             //'updated_at',
 
@@ -44,5 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-
+    <?php Pjax::end(); ?>
+    
 </div>

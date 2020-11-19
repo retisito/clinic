@@ -11,14 +11,16 @@ use app\models\Inspection;
  */
 class InspectionSearch extends Inspection
 {
+    public $chunck;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'equipment_id', 'status_id'], 'integer'],
-            [['name', 'code', 'description', 'planned_at', 'executed_at', 'data_sent_at', 'report_sent_at', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['chunck'], 'safe'],
         ];
     }
 
@@ -40,7 +42,22 @@ class InspectionSearch extends Inspection
      */
     public function search($params)
     {
-        $query = Inspection::find();
+        $query = (new \yii\db\Query())
+            ->select([
+                'inspection.id',
+                'center.name as center_name',
+                'environment.name as environment_name',
+                'equipment.name as equipment_name',
+                'inspection.name',
+                'status.name as status_name',
+                'inspection.created_by',
+                'inspection.updated_by',
+            ])
+            ->from('inspection')
+            ->leftJoin('equipment', 'inspection.equipment_id = equipment.id')
+            ->leftJoin('environment', 'equipment.environment_id = environment.id')
+            ->leftJoin('center', 'environment.center_id = center.id')
+            ->leftJoin('status', 'inspection.status_id = status.id');
 
         // add conditions that should always apply here
 
@@ -57,23 +74,26 @@ class InspectionSearch extends Inspection
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'equipment_id' => $this->equipment_id,
-            'status_id' => $this->status_id,
-            'planned_at' => $this->planned_at,
-            'executed_at' => $this->executed_at,
-            'data_sent_at' => $this->data_sent_at,
-            'report_sent_at' => $this->report_sent_at,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+        $query->orFilterWhere([
+            'inspection.id' => $this->chunck,
+            //'equipment_id' => $this->chunck,
+            //'status_id' => $this->chunck,
+            //'planned_at' => $this->chunck,
+            //'executed_at' => $this->chunck,
+            //'data_sent_at' => $this->chunck,
+            //'report_sent_at' => $this->chunck,
+            //'created_at' => $this->chunck,
+            //'updated_at' => $this->chunck,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'code', $this->code])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
+        $query->orFilterWhere(['like', 'inspection.name', $this->chunck])
+            ->orFilterWhere(['like', 'center.name', $this->chunck])
+            ->orFilterWhere(['like', 'environment.name', $this->chunck])
+            ->orFilterWhere(['like', 'equipment.name', $this->chunck])
+            ->orFilterWhere(['like', 'inspection.name', $this->chunck])
+            ->orFilterWhere(['like', 'status.name', $this->chunck])
+            ->orFilterWhere(['like', 'inspection.created_by', $this->chunck])
+            ->orFilterWhere(['like', 'inspection.updated_by', $this->chunck]);
 
         return $dataProvider;
     }

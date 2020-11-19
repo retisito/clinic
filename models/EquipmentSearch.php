@@ -11,14 +11,16 @@ use app\models\Equipment;
  */
 class EquipmentSearch extends Equipment
 {
+    public $chunck;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'environment_id'], 'integer'],
-            [['name', 'brand', 'model', 'serial', 'code', 'size', 'description', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['chunck'], 'safe'],
         ];
     }
 
@@ -39,9 +41,20 @@ class EquipmentSearch extends Equipment
      * @return ActiveDataProvider
      */
     public function search($params)
-    {
-        $query = Equipment::find();
-
+    {   
+        $query = (new \yii\db\Query())
+            ->select([
+                'equipment.id',
+                'center.name as center_name',
+                'environment.name as environment_name',
+                'equipment.name',
+                'equipment.created_by',
+                'equipment.updated_by',
+            ])
+            ->from('equipment')
+            ->leftJoin('environment', 'equipment.environment_id = environment.id')
+            ->leftJoin('center', 'environment.center_id = center.id');
+            
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -57,23 +70,19 @@ class EquipmentSearch extends Equipment
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'environment_id' => $this->environment_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+        $query->orFilterWhere([
+            'equipment.id' => $this->chunck,
+            //'environment_id' => $this->chunck,
+            //'created_at' => $this->chunck,
+            //'updated_at' => $this->chunck,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'brand', $this->brand])
-            ->andFilterWhere(['like', 'model', $this->model])
-            ->andFilterWhere(['like', 'serial', $this->serial])
-            ->andFilterWhere(['like', 'code', $this->code])
-            ->andFilterWhere(['like', 'size', $this->size])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
-
+        $query->orFilterWhere(['like', 'center.name', $this->chunck])
+            ->orFilterWhere(['like', 'environment.name', $this->chunck])
+            ->orFilterWhere(['like', 'equipment.name', $this->chunck])
+            ->orFilterWhere(['like', 'equipment.created_by', $this->chunck])
+            ->orFilterWhere(['like', 'equipment.updated_by', $this->chunck]);
+        
         return $dataProvider;
     }
 }

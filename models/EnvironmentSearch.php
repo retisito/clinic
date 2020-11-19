@@ -40,7 +40,8 @@ class EnvironmentSearch extends Environment
      */
     public function search($params)
     {
-        $query = Environment::find();
+        $query = Environment::find()
+            ->joinWith('center');
 
         // add conditions that should always apply here
 
@@ -58,15 +59,16 @@ class EnvironmentSearch extends Environment
 
         // grid filtering conditions
         $query->orFilterWhere([
-            'id' => $this->chunck,
+            'environment.id' => $this->chunck,
             //'center_id' => $this->chunck,
             //'created_at' => $this->chunck,
             //'updated_at' => $this->chunck,
         ]);
 
-        $query->orFilterWhere(['like', 'name', $this->chunck])
-              ->orFilterWhere(['like', 'created_by', $this->chunck])
-              ->orFilterWhere(['like', 'updated_by', $this->chunck]);
+        $query->orFilterWhere(['like', 'center.name', $this->chunck])
+            ->orFilterWhere(['like', 'environment.name', $this->chunck])
+            ->orFilterWhere(['like', 'environment.created_by', $this->chunck])
+            ->orFilterWhere(['like', 'environment.updated_by', $this->chunck]);
 
         return $dataProvider;
     }

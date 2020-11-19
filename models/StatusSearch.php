@@ -11,6 +11,8 @@ use app\models\Status;
  */
 class StatusSearch extends Status
 {
+    public $chunck;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class StatusSearch extends Status
     {
         return [
             [['id'], 'integer'],
-            [['name', 'description', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'safe'],
+            [['chunck'], 'safe'],
         ];
     }
 
@@ -57,16 +59,15 @@ class StatusSearch extends Status
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+        $query->orFilterWhere([
+            'id' => $this->chunck,
+            //'created_at' => $this->chunck,
+            //'updated_at' => $this->chunck,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
+        $query->orFilterWhere(['like', 'name', $this->chunck])
+            ->orFilterWhere(['like', 'created_by', $this->chunck])
+            ->orFilterWhere(['like', 'updated_by', $this->chunck]);
 
         return $dataProvider;
     }

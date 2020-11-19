@@ -66,8 +66,8 @@ class CenterSearch extends Center
         ]);
 
         $query->orFilterWhere(['like', 'name', $this->chunck])
-              ->orFilterWhere(['like', 'created_by', $this->chunck])
-              ->orFilterWhere(['like', 'updated_by', $this->chunck]);
+            ->orFilterWhere(['like', 'created_by', $this->chunck])
+            ->orFilterWhere(['like', 'updated_by', $this->chunck]);
 
         return $dataProvider;
     }

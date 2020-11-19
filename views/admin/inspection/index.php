@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\InspectionSearch */
@@ -18,26 +19,29 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Inspection', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php Pjax::begin(); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'equipment_id',
-            'status_id',
+            'center_name',
+            'environment_name',
+            'equipment_name',
             'name',
-            'code',
+            'status_name',
+            //'code',
             //'description:ntext',
             //'planned_at',
             //'executed_at',
             //'data_sent_at',
             //'report_sent_at',
-            //'created_by',
-            //'updated_by',
+            'created_by',
+            'updated_by',
             //'created_at',
             //'updated_at',
 
