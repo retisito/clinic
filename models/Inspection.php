@@ -110,7 +110,7 @@ class Inspection extends \yii\db\ActiveRecord
         if (!empty($this->report_sent_at))
             $this->report_sent_at = new \yii\db\Expression("'$this->report_sent_at'");
            
-        return true;
+        return parent::beforeSave($insert);
     }
     
 }

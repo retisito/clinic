@@ -27,7 +27,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
+    <?php /*
     NavBar::begin([
         'brandLabel' => '<img src="/img/serofca-logo-1.png" style="max-width:100%;">',
         'brandUrl' => Yii::$app->homeUrl,
@@ -36,7 +36,7 @@ AppAsset::register($this);
         ],
     ]);
     
-    NavBar::end();
+    NavBar::end(); */
     ?>
 
     <div class="container">
@@ -44,7 +44,7 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
-
+<!--
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
@@ -52,7 +52,7 @@ AppAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
-
+-->
 <?php $this->endBody() ?>
 </body>
 </html>
