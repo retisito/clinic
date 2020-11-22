@@ -59,7 +59,7 @@ class SeedController extends Controller
         #------------------------------------------#
 
         echo "  . Create user admin \n";
-        $pwd = 'st4rw4rs';
+        $pwd = 'qwerty';
         $hash = Yii::$app->getSecurity()->generatePasswordHash($pwd);
         $admin = [   
             'name' => 'admin',

@@ -37,13 +37,13 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Dashboard', 'url' => ['/admin/dashboard/index']],
-            ['label' => 'Centro', 'url' => ['/admin/center/index']],
-            ['label' => 'Environment', 'url' => ['/admin/environment/index']],
-            ['label' => 'Equipment', 'url' => ['/admin/equipment/index']],
-            ['label' => 'Status', 'url' => ['/admin/status/index']],
-            ['label' => 'Inspection', 'url' => ['/admin/inspection/index']],
-            ['label' => 'User', 'url' => ['/admin/user/index']],
+            ['label' => 'Dashboard', 'url' => ['/admin/dashboard']],
+            ['label' => 'Centro', 'url' => ['/admin/center']],
+            ['label' => 'Environment', 'url' => ['/admin/environment']],
+            ['label' => 'Equipment', 'url' => ['/admin/equipment']],
+            ['label' => 'Status', 'url' => ['/admin/status']],
+            ['label' => 'Inspection', 'url' => ['/admin/inspection']],
+            ['label' => 'User', 'url' => ['/admin/user']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

@@ -16,6 +16,7 @@ class EnvironmentController extends Controller
 {
     public $layout = 'admin/main';
     use \app\common\traits\Authorization;
+    use \app\common\traits\ChangeFirstPassword;
     
     /**
      * Lists all Environment models.
