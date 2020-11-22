@@ -16,6 +16,7 @@ use yii\web\IdentityInterface;
  * @property string $status
  * @property string|null $auth_key
  * @property string|null $access_token
+ * @property int|null $password_change_count
  * @property int|null $login_count
  * @property string|null $last_login
  * @property string|null $created_by
@@ -46,7 +47,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['name', 'email', 'password'], 'required'],
-            [['login_count'], 'integer'],
+            [['password_change_count', 'login_count'], 'integer'],
             [['last_login', 'created_at', 'updated_at'], 'safe'],
             [['name', 'email', 'password', 'role', 'status', 'auth_key', 'access_token', 'created_by', 'updated_by'], 'string', 'max' => 255],
             [['email'], 'unique'],
@@ -67,6 +68,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'status' => 'Status',
             'auth_key' => 'Auth Key',
             'access_token' => 'Access Token',
+            'password_change_count' => 'Password Change Count',
             'login_count' => 'Login Count',
             'last_login' => 'Last Login',
             'created_by' => 'Created By',
@@ -141,4 +143,5 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
         return true;
     }
+    
 }

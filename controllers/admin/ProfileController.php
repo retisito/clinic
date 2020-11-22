@@ -3,7 +3,6 @@
 namespace app\controllers\admin;
 
 use Yii;
-use app\models\User;
 
 class ProfileController extends \yii\web\Controller
 {
@@ -12,8 +11,8 @@ class ProfileController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        $model = User::findOne(Yii::$app->user->id);
-            
+        $model = Yii::$app->user->identity;
+        
         if ($model->load(Yii::$app->request->post())) {
             $user = Yii::$app->request->post()['User'];
             $old_pwd = $user['current_password'];
@@ -24,6 +23,7 @@ class ProfileController extends \yii\web\Controller
             if (!empty($old_pwd) && !empty($new_pwd) && !empty($rep_pwd)) {
                 if ($model->validateChangePassword($old_pwd, $new_pwd, $rep_pwd)) {
                     $model->password = Yii::$app->getSecurity()->generatePasswordHash($new_pwd);
+                    $model->password_change_count++;
                     
                     if ($model->save()) {
                         Yii::$app->user->logout();

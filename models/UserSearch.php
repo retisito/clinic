@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\User;
@@ -11,14 +12,16 @@ use app\models\User;
  */
 class UserSearch extends User
 {
+    public $chunck;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'login_count'], 'integer'],
-            [['name', 'email', 'password', 'role', 'status', 'auth_key', 'access_token', 'last_login', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['chunck'], 'safe'],
         ];
     }
 
@@ -40,7 +43,9 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = User::find()
+            ->where(['<>', 'role', 'root'])
+            ->andWhere(['<>', 'id', Yii::$app->user->id]);
 
         // add conditions that should always apply here
 
@@ -57,23 +62,22 @@ class UserSearch extends User
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'login_count' => $this->login_count,
-            'last_login' => $this->last_login,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+        $query->orFilterWhere([
+            'id' => $this->chunck,
+            //'login_count' => $this->chunck,
+            //'last_login' => $this->chunck,
+            //'created_at' => $this->chunck,
+            //'updated_at' => $this->chunck,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'role', $this->role])
-            ->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'access_token', $this->access_token])
-            ->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
+        $query->orFilterWhere(['like', 'name', $this->chunck])
+            ->orFilterWhere(['like', 'email', $this->chunck])
+            ->orFilterWhere(['like', 'role', $this->chunck])
+            ->orFilterWhere(['like', 'status', $this->chunck])
+            ->orFilterWhere(['like', 'created_by', $this->chunck])
+            ->orFilterWhere(['like', 'updated_by', $this->chunck]);
+            //->andFilterWhere(['<>', 'role', 'root'])
+            //->andFilterWhere(['<>', 'id', Yii::$app->user->id]);
 
         return $dataProvider;
     }

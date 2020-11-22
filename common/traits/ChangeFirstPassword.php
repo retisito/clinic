@@ -9,7 +9,7 @@ trait ChangeFirstPassword
 {
     public function beforeAction($event)
 	{   
-        if (User::findOne(Yii::$app->user->id)->login_count == 1)
+        if (Yii::$app->user->identity->password_change_count == 0)
             return  $this->redirect(['admin/profile']);
         else
             return true;

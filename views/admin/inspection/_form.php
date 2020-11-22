@@ -99,7 +99,6 @@ use app\models\Status;
     ?>
 
     <?= $form->field($model, 'executed_at')->widget(DatePicker::classname(), [
-            'name' => 'operation_time', 
             'value' => date('d-M-Y g:i A', strtotime('+2 days')),
             'options' => ['placeholder' => 'Select operating time ...'],
             'convertFormat' => true,
@@ -112,7 +111,6 @@ use app\models\Status;
     ?>
 
     <?= $form->field($model, 'data_sent_at')->widget(DatePicker::classname(), [
-            'name' => 'operation_time', 
             'value' => date('d-M-Y g:i A', strtotime('+2 days')),
             'options' => ['placeholder' => 'Select operating time ...'],
             'convertFormat' => true,
@@ -125,7 +123,6 @@ use app\models\Status;
     ?>
 
     <?= $form->field($model, 'report_sent_at')->widget(DatePicker::classname(), [
-            'name' => 'operation_time', 
             'value' => date('d-M-Y g:i A', strtotime('+2 days')),
             'options' => ['placeholder' => 'Select operating time ...'],
             'convertFormat' => true,

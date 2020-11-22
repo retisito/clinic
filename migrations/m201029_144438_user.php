@@ -22,6 +22,7 @@ class m201029_144438_user extends Migration
             'status' => $this->string()->notNull()->defaultValue('inactivo'),
             'auth_key' => $this->string(),
             'access_token' => $this->string(),
+            'password_change_count' => $this->integer()->defaultValue(0),
             'login_count' => $this->integer()->defaultValue(0),
             'last_login' => $this->datetime(),
             'created_by' => $this->string(),
