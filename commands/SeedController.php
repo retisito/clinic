@@ -7,10 +7,10 @@
 
 namespace app\commands;
 
+use Yii;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use app\models\User;
-use Yii;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -48,7 +48,8 @@ class SeedController extends Controller
             'name' => 'root',
             'email' => 'root@someonedomain.com',
             'password' => $hash,
-            'role' => 'root'
+            'role' => 'root',
+            'status' => 'activo'
         ]; 
 
         $user = new User();
@@ -58,13 +59,14 @@ class SeedController extends Controller
         #------------------------------------------#
 
         echo "  . Create user admin \n";
-        $pwd = '0123456789';
+        $pwd = 'st4rw4rs';
         $hash = Yii::$app->getSecurity()->generatePasswordHash($pwd);
         $admin = [   
             'name' => 'admin',
             'email' => 'admin@someonedomain.com',
             'password' => $hash,
-            'role' => 'admin'
+            'role' => 'admin',
+            'status' => 'activo'
         ]; 
 
         $user = new User();

@@ -11,18 +11,19 @@ class m201029_144438_user extends Migration
      * {@inheritdoc}
      */
     public function safeUp()
-    {
-        $role = 'employee';
-        
+    {        
         echo "Create table User.\n";
         $this->createTable('user', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'email' => $this->string()->notNull()->unique(),
             'password' => $this->string()->notNull(),
-            'role' => $this->string()->notNull()->defaultValue($role),
+            'role' => $this->string()->notNull()->defaultValue('employee'),
+            'status' => $this->string()->notNull()->defaultValue('inactivo'),
             'auth_key' => $this->string(),
             'access_token' => $this->string(),
+            'login_count' => $this->integer()->defaultValue(0),
+            'last_login' => $this->datetime(),
             'created_by' => $this->string(),
             'updated_by' => $this->string(),
             'created_at' => $this->datetime(),

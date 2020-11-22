@@ -13,11 +13,8 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $password
  * @property string $role
- * @property string $status
  * @property string|null $auth_key
  * @property string|null $access_token
- * @property int|null $login_count
- * @property string|null $last_login
  * @property string|null $created_by
  * @property string|null $updated_by
  * @property string|null $created_at
@@ -25,10 +22,6 @@ use yii\web\IdentityInterface;
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
-    public $current_password;
-    public $new_password;
-    public $repeat_new_password;
-
     use \app\common\traits\Signature;
 
     /**
@@ -46,9 +39,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['name', 'email', 'password'], 'required'],
-            [['login_count'], 'integer'],
-            [['last_login', 'created_at', 'updated_at'], 'safe'],
-            [['name', 'email', 'password', 'role', 'status', 'auth_key', 'access_token', 'created_by', 'updated_by'], 'string', 'max' => 255],
+            [['created_at', 'updated_at'], 'safe'],
+            [['name', 'email', 'password', 'role', 'authKey', 'access_token', 'created_by', 'updated_by'], 'string', 'max' => 255],
             [['email'], 'unique'],
         ];
     }
@@ -64,11 +56,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'email' => 'Email',
             'password' => 'Password',
             'role' => 'Role',
-            'status' => 'Status',
-            'auth_key' => 'Auth Key',
+            'authKey' => 'Auth Key',
             'access_token' => 'Access Token',
-            'login_count' => 'Login Count',
-            'last_login' => 'Last Login',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
             'created_at' => 'Created At',
@@ -126,19 +115,5 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function validatePassword($pwd)
     {
         return Yii::$app->getSecurity()->validatePassword($pwd, $this->password);
-    }
-
-    public function validateChangePassword($pwd, $new_pwd, $rep_pwd)
-    {
-        if (!$this->validatePassword($pwd))
-            return false;
-
-        if ($pwd == $new_pwd)
-            return false;
-
-        if ($new_pwd != $rep_pwd)
-            return false;
-
-        return true;
     }
 }
