@@ -44,14 +44,18 @@ AppAsset::register($this);
             ['label' => 'Status', 'url' => ['/admin/status']],
             ['label' => 'Inspection', 'url' => ['/admin/inspection']],
             ['label' => 'User', 'url' => ['/admin/user']],
-            '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->name . ')',
-                ['class' => 'btn btn-link logout']
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Login', 'url' => ['/site/login']]
+            ) : (
+                '<li>'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->user->identity->name . ')',
+                    ['class' => 'btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>'
             )
-            . Html::endForm()
-            . '</li>'
         ],
     ]);
     NavBar::end();
