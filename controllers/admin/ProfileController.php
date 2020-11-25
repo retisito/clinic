@@ -6,9 +6,9 @@ use Yii;
 
 class ProfileController extends \yii\web\Controller
 {
-    public $layout = 'admin/main';
+    use \app\common\traits\AccessControl;
     use \app\common\traits\Authorization;
-
+    
     public function actionIndex()
     {
         $model = Yii::$app->user->identity;

@@ -13,11 +13,9 @@ use yii\web\NotFoundHttpException;
  */
 class CenterController extends Controller
 {
-    public $layout = 'admin/main';
+    use \app\common\traits\AccessControl;
     use \app\common\traits\Authorization;
-    use \app\common\traits\ChangeFirstPassword;
-
-
+    
     /**
      * Lists all Center models.
      * @return mixed

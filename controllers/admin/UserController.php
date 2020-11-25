@@ -13,10 +13,9 @@ use yii\web\NotFoundHttpException;
  */
 class UserController extends Controller
 {
-    public $layout = 'admin/main';
+    use \app\common\traits\AccessControl;
     use \app\common\traits\Authorization;
-    use \app\common\traits\ChangeFirstPassword;
-
+    
     /**
      * Lists all User models.
      * @return mixed
@@ -40,8 +39,13 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        
+        if (!$this->touchModel($model))
+            return $this->redirect(['index']);    
+        
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model
         ]);
     }
 
@@ -79,6 +83,9 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
+        if (!$this->touchModel($model))
+            return $this->redirect(['index']);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -97,7 +104,12 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if (!$this->touchModel($model))
+            return $this->redirect(['index']);
+
+        $model->delete();
 
         return $this->redirect(['index']);
     }
@@ -116,5 +128,21 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    // The current user can touch a single model
+    protected function touchModel($model) {
+    
+        // Se verifica que no sea la misma persona
+        if (Yii::$app->user->id == $model->id)
+            return false;
+
+        // Se verifica que el admin solo pueda
+        // editar usuarios con rol de empleados    
+        if (Yii::$app->user->identity->role == 'admin' &&
+            in_array($model->role, ['root', 'admin']))
+            return false;
+
+        return true;
     }
 }
