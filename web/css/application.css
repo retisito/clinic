@@ -114,11 +114,7 @@ a.desc:after {
     outline: none;
 }
 
-/* Fixies */
-.button-fix{
-    padding-top: 10px;
-}
-
+/* Image Brand */
 .navbar-brand{
     max-width: 150px;
 }

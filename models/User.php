@@ -61,7 +61,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Nombre',
             'email' => 'Email',
             'password' => 'Password',
             'role' => 'Role',
@@ -70,11 +70,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'access_token' => 'Access Token',
             'password_change_count' => 'Password Change Count',
             'login_count' => 'Login Count',
-            'last_login' => 'Last Login',
+            'last_login' => 'Último Acceso',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'current_password' => 'Clave Actual',
+            'new_password' => 'Clave Nueva',
+            'repeat_new_password' => 'Repita su Clave Nueva'
         ];
     }
 

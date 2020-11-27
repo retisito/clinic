@@ -7,9 +7,12 @@ use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\bootstrap\Dropdown;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use kartik\icons\Icon;
 
+Icon::map($this, Icon::FAS);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -37,20 +40,53 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Dashboard', 'url' => ['/admin/dashboard']],
-            ['label' => 'Centro', 'url' => ['/admin/center']],
-            ['label' => 'Environment', 'url' => ['/admin/environment']],
-            ['label' => 'Equipment', 'url' => ['/admin/equipment']],
-            ['label' => 'Status', 'url' => ['/admin/status']],
-            ['label' => 'Inspection', 'url' => ['/admin/inspection']],
-            ['label' => 'User', 'url' => ['/admin/user']],
             '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->name . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
+            . Html::a(Icon::show('tachometer-alt', ['framework' => Icon::FAS]) 
+            . 'Dashboard', ['/admin/dashboard'])
+            . '</li>',
+            '<li>'
+            . Html::a(Icon::show('users', ['framework' => Icon::FAS]) 
+            . 'Usuarios', ['/admin/user'])
+            . '</li>',
+            '<li>'
+            . Html::a(Icon::show('clinic-medical', ['framework' => Icon::FAS]) 
+            . 'Centros', ['/admin/center'])
+            . '</li>',
+            '<li>'
+            . Html::a(Icon::show('sign', ['framework' => Icon::FAS]) 
+            . 'Ambientes', ['/admin/environment'])
+            . '</li>',
+            '<li>'
+            . Html::a(Icon::show('laptop-medical', ['framework' => Icon::FAS]) 
+            . 'Equipos', ['/admin/equipment'])
+            . '</li>',
+            '<li>'
+            . Html::a(Icon::show('thermometer', ['framework' => Icon::FAS]) 
+            . 'Estados', ['/admin/status'])
+            . '</li>',
+            '<li>'
+            . Html::a(Icon::show('clipboard-list', ['framework' => Icon::FAS]) 
+            . 'Inspecciones', ['/admin/inspection'])
+            . '</li>',
+            '<li class="dropdown">'
+                . '<a href="#" data-toggle="dropdown" class="dropdown-toggle">'
+                . Icon::show('user-circle', ['class' => 'fa-lg', 'framework' => Icon::FAS])
+                . '(' . explode(' ', Yii::$app->user->identity->name)[0] . ')'
+                . '<b class="caret"></b></a>'
+                . Dropdown::widget([
+                        'items' => [
+                            '<li>'
+                            . Html::a(Icon::show('id-card', ['framework' => Icon::FAS]) 
+                            . 'Perfil', ['/admin/profile'])
+                            . '</li>',
+                            '<li>' 
+                            . Html::a(Icon::show('sign-out-alt', ['framework' => Icon::FAS]) 
+                            . 'Logout', ['#'], ['onclick' => '$("#logout").submit(); return false;'])
+                            . '</li>'    
+                            . Html::beginForm(['/site/logout'], 'post', ['id' => 'logout']) 
+                            . Html::endForm()
+                        ],
+                    ])
             . '</li>'
         ],
     ]);
@@ -65,7 +101,7 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
-
+<!--
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
@@ -73,7 +109,7 @@ AppAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
-
+-->
 <?php $this->endBody() ?>
 </body>
 </html>
