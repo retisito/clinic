@@ -19,7 +19,8 @@ trait Signature
                 'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => 'updated_by',
                 'value' => isset(Yii::$app->user->identity) ? 
-                    "id:" . Yii::$app->user->identity->id . " name:" . Yii::$app->user->identity->name : 'root',
+                    "id:" . Yii::$app->user->identity->id 
+                    . " name:" . Yii::$app->user->identity->name : 'root',
             ],
             [
                 'class' => TimestampBehavior::className(),

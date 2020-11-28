@@ -15,7 +15,7 @@ $this->title = $model->name;
 <div class="inspection-view">
     <div class="panel panel-default" style="margin-top:25px;">
         <div class="panel-heading" style="color:#888;">
-            <?= Html::a(Icon::show('users', ['framework' => Icon::FAS]) . 'Usuarios', ['index']) ?> 
+            <?= Html::a(Icon::show('clipboard-list', ['framework' => Icon::FAS]) . 'Inspecciones', ['index']) ?> 
             <?= Icon::show('angle-right', ['framework' => Icon::FAS]) 
                 . Icon::show('eye', ['framework' => Icon::FAS]) 
                 . '(' . Html::encode($this->title) . ')' 
