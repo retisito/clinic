@@ -60,19 +60,19 @@ class Inspection extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'equipment_id' => 'Equipment ID',
-            'status_id' => 'Status ID',
-            'name' => 'Name',
-            'code' => 'Code',
-            'description' => 'Description',
-            'planned_at' => 'Planned At',
-            'executed_at' => 'Executed At',
-            'data_sent_at' => 'Data Sent At',
-            'report_sent_at' => 'Report Sent At',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'equipment_id' => 'Equipo ID',
+            'status_id' => 'Estado ID',
+            'name' => 'Inspección',
+            'code' => 'Código',
+            'description' => 'Descripción',
+            'planned_at' => 'Planeado At',
+            'executed_at' => 'Executado At',
+            'data_sent_at' => 'Datos enviado el',
+            'report_sent_at' => 'Reporte enviado el',
+            'created_by' => 'Creado por',
+            'updated_by' => 'Actualizado por',
+            'created_at' => 'Creado el',
+            'updated_at' => 'Actualizado el',
         ];
     }
 

@@ -45,7 +45,7 @@ class EnvironmentView extends \yii\db\ActiveRecord
             'center_name' => 'Centro',
             'name' => 'Ambiente',
             'created_by' => 'Creado por',
-            'updated_by' => 'Modificado por',
+            'updated_by' => 'Actualizado por',
         ];
     }
 }

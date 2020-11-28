@@ -57,18 +57,18 @@ class Equipment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'environment_id' => 'Environment ID',
-            'name' => 'Name',
-            'brand' => 'Brand',
-            'model' => 'Model',
+            'environment_id' => 'Ambiente ID',
+            'name' => 'Equipo',
+            'brand' => 'Marca',
+            'model' => 'Modelo',
             'serial' => 'Serial',
-            'code' => 'Code',
-            'size' => 'Size',
-            'description' => 'Description',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'code' => 'Código',
+            'size' => 'Tamaño',
+            'description' => 'Descripción',
+            'created_by' => 'Creado por',
+            'updated_by' => 'Actualizado por',
+            'created_at' => 'Creado el',
+            'updated_at' => 'Actualizado el',
         ];
     }
 

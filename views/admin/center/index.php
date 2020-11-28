@@ -35,6 +35,7 @@ $this->title = 'Centros';
                     'dataProvider' => $dataProvider,
                     //'filterModel' => $searchModel,
                     'layout' => '{items}{summary}<span style="float:right; margin-top:-50px;">{pager}</span>',
+                    'tableOptions' => ['class' => 'table table-striped table-bordered table-hover'],
                     'columns' => [
                         //['class' => 'yii\grid\SerialColumn'],
 

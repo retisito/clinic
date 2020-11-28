@@ -70,14 +70,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'access_token' => 'Access Token',
             'password_change_count' => 'Password Change Count',
             'login_count' => 'Login Count',
-            'last_login' => 'Último Acceso',
+            'last_login' => 'Último acceso',
             'created_by' => 'Creado por',
             'updated_by' => 'Actualizado por',
             'created_at' => 'Creado el',
             'updated_at' => 'Actualizado el',
-            'current_password' => 'Clave Actual',
-            'new_password' => 'Clave Nueva',
-            'repeat_new_password' => 'Repita su Clave Nueva'
+            'current_password' => 'Clave actual',
+            'new_password' => 'Clave nueva',
+            'repeat_new_password' => 'Repita su clave nueva'
         ];
     }
 

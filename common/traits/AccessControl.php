@@ -10,36 +10,20 @@ trait AccessControl
     var $layout;
     var $ACL = [
         'root' => [
-            'routes' => [
-                'admin/dashboard',
-                'admin/center',
-                'admin/environment',
-                'admin/equipment',
-                'admin/status',
-                'admin/inspection',
-                'admin/user',
-                'admin/profile',
-            ],
+            'controllers' => '*',
             'layout' => 'admin/one'
         ],
         'admin' => [
-            'routes' => [
-                'admin/dashboard',
-                'admin/center',
-                'admin/environment',
-                'admin/equipment',
-                'admin/status',
-                'admin/inspection',
-                'admin/user',
-                'admin/profile',
-            ],
+            'controllers' => '*',
             'layout' => 'admin/one'
         ],
         'employee' => [
-            'routes' => [
-                'admin/dashboard',
-                'admin/inspection',
-                'admin/profile',
+            'controllers' => [
+                'admin/dashboard' => '*',
+                'admin/environment' => ['list'],
+                'admin/equipment' => ['list'],
+                'admin/inspection' => '*',
+                'admin/profile' => '*',
             ],
             'layout' => 'admin/two'
         ],
@@ -62,10 +46,19 @@ trait AccessControl
         
         // Se revisa el ACL para saber si el usuario
         // tiene permiso de acceso al controlador
-        if (!in_array(Yii::$app->controller->id, 
-            $this->ACL[Yii::$app->user->identity->role]['routes']))
-            return $this->redirect(['admin/dashboard']);
+        $controllers = $this->ACL[Yii::$app->user->identity->role]['controllers']; 
+        if (is_array($controllers)) {
+            if (!in_array(Yii::$app->controller->id, array_keys($controllers)))
+                throw new \yii\web\ForbiddenHttpException;
         
+            // Se revisa el ACL para saber si el usuario
+            // tiene permiso de acceso a la acción
+            $actions = $controllers[Yii::$app->controller->id];
+            if (is_array($actions))
+                if (!in_array(Yii::$app->controller->action->id, $actions))
+                    throw new \yii\web\ForbiddenHttpException;
+        }
+
         return true;
     }
 }
