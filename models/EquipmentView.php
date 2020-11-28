@@ -42,11 +42,11 @@ class EquipmentView extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'center_name' => 'Center Name',
-            'environment_name' => 'Environment Name',
-            'name' => 'Name',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
+            'center_name' => 'Centro',
+            'environment_name' => 'Ambiente',
+            'name' => 'Equipo',
+            'created_by' => 'Creado por',
+            'updated_by' => 'Actualizado por',
         ];
     }
 }

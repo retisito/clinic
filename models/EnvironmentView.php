@@ -42,10 +42,10 @@ class EnvironmentView extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'center_name' => 'Center Name',
-            'name' => 'Name',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
+            'center_name' => 'Centro',
+            'name' => 'Ambiente',
+            'created_by' => 'Creado por',
+            'updated_by' => 'Modificado por',
         ];
     }
 }

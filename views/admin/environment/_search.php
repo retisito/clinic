@@ -9,24 +9,19 @@ use kartik\icons\Icon;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="environment-search">
+<?php $form = ActiveForm::begin([
+    'action' => ['index'],
+    'method' => 'get',
+    'options' => [
+        'data-pjax' => 1,
+        'style' => 'height:34px !important;'
+    ],
+]); ?>
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); ?>
-
-    <div class="input-group col-md-12">
-        <?= $form->field($model, 'chunck', ['inputOptions' => ['class' => 'form-control', 'placeholder' => 'Search']])->label(false) ?>
-        <span class="input-group-btn button-fix">
-            <?= Html::submitButton(Icon::show('search', ['framework' => Icon::BSG]), ['class' => 'btn btn-primary']) ?>
-        </span>
-    </div>
-    <br/>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
+<span class="input-group">
+    <?= $form->field($model, 'chunck', ['inputOptions' => ['style' => 'margin-top:-10px;', 'class' => 'form-control', 'placeholder' => 'Buscar...']])->label(false) ?>
+    <span class="input-group-btn">
+        <?= Html::submitButton(Icon::show('search', ['framework' => Icon::BSG]), ['class' => 'btn btn-primary']) ?>
+    </span>
+</span>
+<?php ActiveForm::end(); ?>

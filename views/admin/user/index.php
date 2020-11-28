@@ -34,7 +34,7 @@ $this->title = 'Usuarios';
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     //'filterModel' => $searchModel,
-                    'layout' => '{items}{pager}{summary}',
+                    'layout' => '{items}{summary}<span style="float:right; margin-top:-50px;">{pager}</span>',
                     'columns' => [
                         //['class' => 'yii\grid\SerialColumn'],
 

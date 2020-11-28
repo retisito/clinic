@@ -45,13 +45,13 @@ class InspectionView extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'center_name' => 'Center Name',
-            'environment_name' => 'Environment Name',
-            'equipment_name' => 'Equipment Name',
-            'name' => 'Name',
-            'status_name' => 'Status Name',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
+            'center_name' => 'Centro',
+            'environment_name' => 'Ambiente',
+            'equipment_name' => 'Equipo',
+            'name' => 'Inspección',
+            'status_name' => 'Estado',
+            'created_by' => 'Creado por',
+            'updated_by' => 'Actualizado por',
         ];
     }
 }
