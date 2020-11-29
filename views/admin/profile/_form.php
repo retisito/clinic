@@ -36,7 +36,7 @@ use kartik\icons\Icon;
     </div>
     <div class="form-group">
         <?= Html::submitButton(Icon::show('save', ['framework' => Icon::FAS]) 
-            .'Guardar', ['class' => 'btn btn-success']) 
+            . 'Guardar', ['class' => 'btn btn-success']) 
         ?>
     </div>
     <?php ActiveForm::end(); ?>
