@@ -40,11 +40,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/dashboard' ? 'active' : '') . '">'
             . Html::a(Icon::show('tachometer-alt', ['framework' => Icon::FAS]) 
             . 'Dashboard', ['/admin/dashboard'])
             . '</li>',
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/inspection' ? 'active' : '') . '">'
             . Html::a(Icon::show('clipboard-list', ['framework' => Icon::FAS]) 
             . 'Inspecciones', ['/admin/inspection'])
             . '</li>',

@@ -12,26 +12,26 @@ use kartik\icons\Icon;
 
 <div class="user-form">
     <?php $form = ActiveForm::begin(); ?>
-    <div class="panel panel-default" style="margin-top:15px; background-color:#fdfdfd;">
-        <div style="padding:13px;">
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-            <br/>
-            <?= $form->field($model, 'status')->radioList(
-                ['activo' => 'Activo', 'inactivo' => 'Inactivo'], 
+    <div class="panel panel-default" style="margin-top:15px; padding:13px; background-color:#fdfdfd;">
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    </div>
+    <div class="panel panel-default" style="margin-top:15px; padding:13px; background-color:#fdfdfd;">        
+        <?= $form->field($model, 'status')->radioList(
+            ['activo' => 'Activo', 'inactivo' => 'Inactivo'], 
+            ['unselect' => null]
+        ); 
+        ?>
+    </div>
+    <?php if (User::findOne(Yii::$app->user->id)->role == 'root'): ?>
+    <div class="panel panel-default" style="margin-top:15px; padding:13px; background-color:#fdfdfd;">        
+        <?= $form->field($model, 'role')->radioList(
+                ['admin' => 'Admin', 'employee' => 'Employee'], 
                 ['unselect' => null]
             ); 
-            ?>
-            <?php if (User::findOne(Yii::$app->user->id)->role == 'root'): ?>
-            <hr/>
-            <?= $form->field($model, 'role')->radioList(
-                    ['admin' => 'Admin', 'employee' => 'Employee'], 
-                    ['unselect' => null]
-                ); 
-            ?>
-            <?php endif ?>
-        </div>
+        ?>
     </div>
+    <?php endif ?>
     <div class="form-group">
         <?= Html::submitButton(Icon::show('save', ['framework' => Icon::FAS]) 
             . 'Guardar', ['class' => 'btn btn-success']) 

@@ -32,7 +32,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => '<img src="/img/serofca-logo-1.png" style="max-width:100%;">',
+        'brandLabel' => Html::img('/img/serofca-logo-1.png', ['style' => 'max-width:100%;']),
         //'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-inverse navbar-fixed-top'],        
     ]);
@@ -40,31 +40,31 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/dashboard' ? 'active' : '') . '">'
             . Html::a(Icon::show('tachometer-alt', ['framework' => Icon::FAS]) 
             . 'Dashboard', ['/admin/dashboard'])
             . '</li>',
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/user' ? 'active' : '') . '">'
             . Html::a(Icon::show('users', ['framework' => Icon::FAS]) 
             . 'Usuarios', ['/admin/user'])
             . '</li>',
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/center' ? 'active' : '') . '">'
             . Html::a(Icon::show('clinic-medical', ['framework' => Icon::FAS]) 
             . 'Centros', ['/admin/center'])
             . '</li>',
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/environment' ? 'active' : '') . '">'
             . Html::a(Icon::show('sign', ['framework' => Icon::FAS]) 
             . 'Ambientes', ['/admin/environment'])
             . '</li>',
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/equipment' ? 'active' : '') . '">'
             . Html::a(Icon::show('laptop-medical', ['framework' => Icon::FAS]) 
             . 'Equipos', ['/admin/equipment'])
             . '</li>',
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/status' ? 'active' : '') . '">'
             . Html::a(Icon::show('thermometer', ['framework' => Icon::FAS]) 
             . 'Estados', ['/admin/status'])
             . '</li>',
-            '<li>'
+            '<li class="' . (Yii::$app->controller->id == 'admin/inspection' ? 'active' : '') . '">'
             . Html::a(Icon::show('clipboard-list', ['framework' => Icon::FAS]) 
             . 'Inspecciones', ['/admin/inspection'])
             . '</li>',

@@ -44,7 +44,7 @@ $this->title = 'Usuarios';
                         'email:email',
                         //'password',
                         'role',
-                        //'status',
+                        'status',
                         //'auth_key',
                         //'access_token',
                         //'login_count',

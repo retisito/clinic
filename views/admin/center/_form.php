@@ -11,12 +11,10 @@ use kartik\icons\Icon;
 
 <div class="center-form">
     <?php $form = ActiveForm::begin(); ?>
-    <div class="panel panel-default" style="margin-top:15px; background-color:#fdfdfd;">
-        <div style="padding:13px;">
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-            </div>
-        </div>
+    <div class="panel panel-default" style="margin-top:15px; padding:13px; background-color:#fdfdfd;">
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label('Nombre') ?>
+    </div>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
     <div class="form-group">
         <?= Html::submitButton(Icon::show('save', ['framework' => Icon::FAS]) 
             . 'Guardar', ['class' => 'btn btn-success']) 

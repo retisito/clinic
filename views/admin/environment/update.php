@@ -12,7 +12,7 @@ $this->title = $model->name;
 //$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="environment-update">
-<div class="panel panel-default" style="margin-top:25px;">
+    <div class="panel panel-default" style="margin-top:25px;">
         <div class="panel-heading" style="color:#888;">
             <?= Html::a(Icon::show('sign', ['framework' => Icon::FAS]) . 'Ambientes', ['index']) ?> 
             <?= Icon::show('angle-right', ['framework' => Icon::FAS]) 

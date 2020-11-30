@@ -12,7 +12,7 @@ $this->title = 'Login';
 
 <div class="sidenav">
     <div class="login-main-text">
-    <img src="/img/serofca-logo-1.png" style="max-width:100%;">
+    <?= Html::img('/img/serofca-logo-1.png', ['style' => 'max-width:100%;']) ?>
     <h2>Application<br> Login Page</h2>
     <p>Login from here to access.</p>
     </div>
