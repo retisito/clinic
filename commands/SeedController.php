@@ -46,7 +46,7 @@ class SeedController extends Controller
         $hash = Yii::$app->getSecurity()->generatePasswordHash($pwd);
         $root = [   
             'name' => 'root',
-            'email' => 'root@someonedomain.com',
+            'email' => 'root@serofca.com',
             'password' => $hash,
             'role' => 'root',
             'status' => 'activo'
@@ -63,7 +63,7 @@ class SeedController extends Controller
         $hash = Yii::$app->getSecurity()->generatePasswordHash($pwd);
         $admin = [   
             'name' => 'admin',
-            'email' => 'admin@someonedomain.com',
+            'email' => 'admin@serofca.com',
             'password' => $hash,
             'role' => 'admin',
             'status' => 'activo'
